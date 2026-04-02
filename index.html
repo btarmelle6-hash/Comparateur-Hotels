@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoStay — Hôtels écologiques</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Police Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Leaflet for Maps -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="logo" onclick="goHome()" style="cursor:pointer">
+        <span class="logo__icon">🌿</span>
+        <span class="logo__text">EcoStay</span>
+      </div>
+      <p class="header__tagline">Trouvez votre hôtel éco-responsable</p>
+    </div>
+  </header>
+
+  <!-- ===== BARRE DE RECHERCHE ===== -->
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Où souhaitez-vous séjourner ?</h1>
+      <p class="hero__subtitle">Comparez des centaines d'hôtels en quelques secondes</p>
+
+      <!-- Formulaire de recherche -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="cityInput"
+          class="search-bar__input"
+          placeholder="Ex : Paris, Tokyo, New York..."
+          autocomplete="off"
+        />
+        <button id="searchBtn" class="search-bar__btn" onclick="searchHotels()">
+          <span class="btn-icon">🔍</span>
+          Rechercher
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BANNIERE CRITERES ECOLOGIQUES ===== -->
+  <section class="eco-criteria-banner" id="ecoCriteriaBanner">
+    <div class="eco-criteria-banner__inner">
+      <h2 class="eco-criteria-banner__title">Comment EcoStay evalue les hotels</h2>
+      <p class="eco-criteria-banner__subtitle">Nos recommandations reposent sur cinq grands criteres environnementaux.</p>
+      <div class="eco-criteria-grid">
+        <article class="eco-criteria-card">
+          <span class="eco-criteria-card__icon">💧</span>
+          <h3 class="eco-criteria-card__title">Gestion des ressources</h3>
+          <p class="eco-criteria-card__description">Consommation d'eau, energie, isolation, eclairage et optimisation des equipements.</p>
+        </article>
+        <article class="eco-criteria-card">
+          <span class="eco-criteria-card__icon">♻️</span>
+          <h3 class="eco-criteria-card__title">Gestion des dechets</h3>
+          <p class="eco-criteria-card__description">Recyclage, reduction du plastique, produits rechargeables et limitation du gaspillage.</p>
+        </article>
+        <article class="eco-criteria-card">
+          <span class="eco-criteria-card__icon">🏗️</span>
+          <h3 class="eco-criteria-card__title">Construction & materiaux</h3>
+          <p class="eco-criteria-card__description">Usage de materiaux durables, renovation responsable et qualite du bati.</p>
+        </article>
+        <article class="eco-criteria-card">
+          <span class="eco-criteria-card__icon">🥗</span>
+          <h3 class="eco-criteria-card__title">Restauration durable</h3>
+          <p class="eco-criteria-card__description">Produits locaux, options vegetariennes, anti-gaspillage et approvisionnement responsable.</p>
+        </article>
+        <article class="eco-criteria-card">
+          <span class="eco-criteria-card__icon">🚲</span>
+          <h3 class="eco-criteria-card__title">Mobilite & accessibilite</h3>
+          <p class="eco-criteria-card__description">Acces transports publics, mobilite douce, bornes et alternatives bas carbone.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OFFRE CLIENT PREMIUM ===== -->
+  <section class="professional-offer">
+    <div class="professional-offer__inner">
+      <div class="professional-offer__header">
+        <h2 class="professional-offer__title">Offre Premium EcoStay</h2>
+        <p class="professional-offer__subtitle">Voyagez malin, économisez plus</p>
+      </div>
+
+      <div class="professional-offer__container">
+        <!-- Image principale -->
+        <div class="professional-offer__image-section">
+          <img 
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&h=400&fit=crop&q=85" 
+            alt="Offre Client Premium Vacances" 
+            class="professional-offer__image"
+          />
+          <div class="professional-offer__overlay">
+            <div class="professional-offer__badge">-25% Aujourd'hui</div>
+          </div>
+        </div>
+
+        <!-- Contenu + Prix + Dates -->
+        <div class="professional-offer__content">
+          <div class="professional-offer__details">
+            <h3 class="professional-offer__plan-title">Accès VIP Voyageur</h3>
+            
+            <div class="professional-offer__price-box">
+              <span class="professional-offer__price"><strong>4,99€</strong>/mois</span>
+              <p class="professional-offer__savings">Au lieu de 9,99€ - Offre limitée</p>
+            </div>
+
+            <div class="professional-offer__dates">
+              <p class="professional-offer__date-item">
+                <span class="professional-offer__date-icon">📅</span> 
+                <strong>Valide dès :</strong> Immédiatement
+              </p>
+              <p class="professional-offer__date-item">
+                <span class="professional-offer__date-icon">⏰</span> 
+                <strong>Offre valable jusqu'au :</strong> 30 Juin 2026
+              </p>
+            </div>
+
+            <ul class="professional-offer__features">
+              <li>✓ Comparaison illimitée d'hôtels 5⭐ premium</li>
+              <li>✓ Accès aux prix exclusifs partenaires</li>
+              <li>✓ Cashback 5% sur vos réservations</li>
+              <li>✓ Filtres avancés (piscine, spa, vue...)</li>
+              <li>✓ Aide VIP pour choisir votre destination</li>
+              <li>✓ Annulation flexible garantie</li>
+            </ul>
+
+            <button class="professional-offer__btn" onclick="alert('Abonnez-vous maintenant ! Email : subscribe@hotelai.fr')">
+              Activer l'Offre
+            </button>
+            <p class="professional-offer__footnote">Annulation gratuite à tout moment - Premier mois offert</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION RÉSULTATS ===== -->
+  <main class="results-section" id="resultsSection" style="display:none;">
+    <div class="results-section__inner">
+
+      <!-- Barre de tri -->
+      <div class="sort-bar">
+        <span class="sort-bar__label">Trier par :</span>
+        <button class="sort-btn active" id="sortPrice" onclick="sortHotels('price')">
+          💰 Prix
+        </button>
+        <button class="sort-btn" id="sortRating" onclick="sortHotels('rating')">
+          ⭐ Note
+        </button>
+      </div>
+
+      <!-- Compteur de résultats -->
+      <p class="results-count" id="resultsCount"></p>
+
+      <!-- Layout: Carte + Grille -->
+      <div class="results-layout">
+        <!-- Carte -->
+        <div id="mapContainer" class="map-container">
+          <div id="map" class="map"></div>
+        </div>
+
+        <!-- Grille d'hôtels -->
+        <div class="hotels-grid" id="hotelsGrid">
+          <!-- Les cartes d'hôtels seront injectées ici par JavaScript -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== LOADER ===== -->
+  <div class="loader" id="loader" style="display:none;">
+    <div class="loader__spinner"></div>
+    <p class="loader__text">Recherche en cours...</p>
+  </div>
+
+  <!-- ===== MESSAGE D'ERREUR ===== -->
+  <div class="error-msg" id="errorMsg" style="display:none;">
+    <p id="errorText"></p>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>🌿 <strong>EcoStay</strong> — Voyages responsables · 2026</p>
+  </footer>
+
+  <!-- Script JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
